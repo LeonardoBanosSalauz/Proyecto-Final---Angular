@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <h2 class="mat-h2">
+    Patient: {{ consult.patient.firstName }} | Date:
+    {{ consult.consultDate | date : "dd-MM-yyyy" }}
+  </h2>
+
+  <mat-card *ngFor="let d of consult.details">
+    <mat-card-header>
+      <mat-card-title>DIAGNOSIS</mat-card-title>
+      <mat-card-subtitle>{{ d.diagnosis }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ d.treatment }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <h2 class="mat-h2">Exams</h2>
+  <mat-card *ngFor="let e of exams">
+    <mat-card-header>
+      <mat-card-title>{{ e.exam.name }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ e.exam.description }}</p>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>

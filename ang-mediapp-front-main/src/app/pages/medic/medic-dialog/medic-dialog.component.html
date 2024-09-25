@@ -1,0 +1,82 @@
+<mat-dialog-content>
+
+  <mat-toolbar>
+    <span>Medic Dialog</span>
+  </mat-toolbar>
+
+
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Nombre *" [(ngModel)]="medic.primaryName" minlength="3" #primaryName="ngModel"
+        required />
+
+      <!-- Se añadió una variable identificadora para resaltar en rojo los campos vacíos, facilitando la visualización de errores 
+    de entrada de datos por parte del usuario. Esto asegura que cualquier campo requerido que no haya sido completado 
+    se distinga claramente con un color de advertencia. -->
+
+      <!-- Se añadió el atributo required para marcar el campo como obligatorio y evitar que quede en blanco. Este atributo 
+    asegura que el formulario no pueda ser enviado sin que el usuario complete el campo, mejorando la validación 
+    de datos desde el lado del cliente. -->
+
+      <div *ngIf="primaryName.invalid && (primaryName.dirty || primaryName.touched)" class="invalid">
+
+        <!-- Se agregó un evento de detonación que se activa cuando el campo de texto es tocado, 
+    lo que permite ejecutar una acción específica al interactuar con el campo, ayudando a 
+    la validación y proporcionando retroalimentación visual o lógica al usuario. -->
+
+        <!-- Se añadió la clase 'invalid' para resaltar los campos vacíos en color rojo, de manera que 
+    los usuarios puedan identificar fácilmente qué campos no han sido completados correctamente 
+    y tomar las acciones necesarias antes de enviar el formulario. -->
+
+        <div *ngIf="primaryName.errors?.['required']">Campo Requerido.</div>
+      </div>
+
+      <!-- En caso de que el campo esté vacío, se activa un mensaje de "campo requerido", el cual aparece 
+    como una cadena de texto resaltada en color rojo. Esto proporciona una clara retroalimentación visual 
+    al usuario, indicándole que el campo es obligatorio y debe ser llenado antes de continuar con el proceso. -->
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Apellidos *" [(ngModel)]="medic.surname" minlength="3" #surname="ngModel" required />
+      <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="invalid">
+        <div *ngIf="surname.errors?.['required']">Campo Requerido.</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="ID Médico *" [(ngModel)]="medic.codMedic" #codMedic="ngModel"
+        pattern="^[0-9]{6}$" minlength="6" maxlength="6" required />
+        
+      <!-- Se añadió una expresión para validar que la longitud del campo sea exactamente de 6 caracteres numéricos. 
+    Además, se agregaron las propiedades 'minlength' y 'maxlength' para establecer la longitud mínima y máxima 
+    del campo, ambas fijadas en 6, forzando al usuario a ingresar exactamente 6 caracteres numéricos. Esto asegura 
+    que los datos ingresados cumplan con el formato requerido antes de permitir el envío del formulario. -->
+
+      <div *ngIf="codMedic.invalid && (codMedic.dirty || codMedic.touched)" class="invalid">El código medico debe
+        contener 6 números.
+      </div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Fotografía del Médico *" [(ngModel)]="medic.photo" #photo="ngModel" required />
+      <div *ngIf="photo.invalid && (photo.dirty || photo.touched)" class="invalid">
+        <div *ngIf="photo.errors?.['required']">Es necesario adjuntar una Fotografía</div>
+      </div>
+    </mat-form-field>
+
+    <img mat-card-image [src]="medic.photo" alt="Photo of Medic" *ngIf="medic.photo" />
+  </div>
+
+
+  <button mat-raised-button color="primary" (click)="onSubmit(primaryName, surname, codMedic, photo)"
+    [disabled]="primaryName.invalid || surname.invalid || codMedic.invalid || photo.invalid" (click)="operate()">
+    Crear Médico
+  </button>
+  <!-- Se añadió un evento 'click' en el botón de "Crear médico" para validar los campos vacíos antes de procesar 
+    la acción. Esta validación se realiza respetando la lógica establecida en el 'FormModule', lo que garantiza que 
+    todos los campos requeridos estén correctamente completados antes de permitir que el formulario sea enviado,
+    mejorando así la integridad de los datos ingresados. -->
+
+  <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
+</mat-dialog-content>

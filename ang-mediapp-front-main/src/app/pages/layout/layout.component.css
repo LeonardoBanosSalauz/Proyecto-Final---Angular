@@ -1,0 +1,47 @@
+/* para organizar elementos en una columna, absolute para que la ocupe completa
+ y se ajusten bien a las dimensiones de pantalla */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ajustes para iconos */
+.mat-icon-button {
+  background-color: transparent; /* Elimina el fondo */
+  border: none; /* Elimina cualquier borde */
+  padding: 0; /* Elimina el padding interno */
+  margin: 0; /* Elimina el margen */
+  width: auto; /* Ajusta el ancho automáticamente */
+  height: auto; /* Ajusta la altura automáticamente */
+  color: white; /* Color del icono */
+  margin-right: 16px; /* Agrega espacio a la derecha del icono de menú */
+}
+
+/* toma todo el espacio disponible en el contenedor principal */
+.example-sidenav-container {
+  flex: 1;
+}
+
+/* actúa como un separador flexible dentro de la barra de herramientas */
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* establece el fondo de los elementos activos a un color gris claro */
+.active {
+  background-color: #dcdcdc;
+}
+
+/* remueve cualquier efecto de foco predeterminado y establece el fondo a blanco
+sin transición ni efecto de resaltado de toque */
+.myButton:focus {
+  box-shadow: 0 0 rgba(255, 255, 255, 1) !important;
+  transition: none !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 1) !important;
+}
